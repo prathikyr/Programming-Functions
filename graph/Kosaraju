@@ -1,0 +1,59 @@
+//To use this function define a macro called SIZE
+//Pass the adjacency matrix, visited array, number of vertices as parameters to the function kosaraju
+//Declare a stack named s globally
+//Function call example:-
+//kosaraju(adj, vis, n);
+
+int dfs(int adj[][SIZE], int *vis, int u, int n){
+	vis[u]=1;
+	//cout<<"visiting "<<u<<endl;
+	//process here
+	for(int i=0; i<n; i++)
+		if(adj[u][i] && !vis[i])
+			dfs(adj, vis, i, n);
+	//cout<<"visited "<<u<<endl;
+	s.push(u);
+	return 0;
+}
+
+void compDfs(int adj[][SIZE], int *vis, int u, int n){
+	vis[u]=1;
+	for(int j=0; j<n; j++)
+    	if(!vis[j] && adj[u][j])
+    	    compDfs(adj, vis, j, n);
+}
+
+int kosaraju(int adj[][SIZE], int *vis, int n){
+	int components=0;
+	
+	//First pass
+	for(int i=0; i<n; i++)
+		if(!vis[i])
+			dfs(adj, vis, i, n);
+	
+	//Making visited again to zero
+	for(int i=0; i<n; i++)
+        vis[i]=0; 
+     
+    //Getting transpose of the graph   
+    int b[SIZE][SIZE]={0};
+	for(int i=0; i<n; i++)
+		for(int j=0; j<n; j++)
+			if(adj[i][j]==1)
+				b[j][i]=1;
+	for(int i=0; i<n; i++)
+		for(int j=0; j<n; j++)
+			adj[i][j]=b[i][j]; 
+			
+	//Second pass
+	while(!s.empty()){
+    	int u=s.top();
+        s.pop();
+        if(!vis[u]){
+        	compDfs(adj, vis, u, n);
+        	components++;
+        }
+	}
+	return components;
+}
+

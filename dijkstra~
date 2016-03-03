@@ -1,0 +1,35 @@
+//To use this implementation of dijkstra's algorithm define SIZE as a macro and MAXM as a macro for infinity
+//Pass the cost matrix, distance array, source, and number of vertices to the function	
+//Returns a distance array as the shortest path to all the vertices
+
+int* dijkstra(int w[][SIZE], int *d, int src, int n){
+	int i, u, mn, j;
+	bool vis[SIZE]={0};
+	
+	vis[src]=true;
+	
+	for(i=0; i<n; i++)				//Create a distance array
+		d[i]=w[src][i];
+	d[src]=0;
+	//Till here initialisation
+		
+	//Dijkstra starts
+	//Each time takes the shortest vertex and adds it to the visited set
+	//and updates the edges going from that vertex
+	
+	for(i=0; i<n-1; i++){
+		mn=MAXM;
+		for(j=0; j<n; j++){
+			if(!vis[j] && d[j]<mn){
+				mn=d[j];
+				u=j;
+			}
+		}
+		//Update and relax edges
+		vis[u]=true;
+		for(j=0; j<n; j++)
+			d[j] = min(d[j], w[u][j]+d[u]);
+	}
+	
+	return d;
+}

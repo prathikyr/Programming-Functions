@@ -1,0 +1,12 @@
+//To use this implementation of Floyd's algorithm define SIZE as a macro and MAXM as a macro for infinity
+//Pass the cost matrix, and number of vertices to the function	
+//Function call example:-
+//floyd(w, n);
+
+void floyd(int w[][SIZE], int n){
+	int i, j, k;
+	for(k=0; k<n; k++)
+		for(i=0; i<n; i++)
+			for(j=0; j<n; j++)
+				w[i][j]=min(w[i][j], w[i][k]+w[k][j]);
+}

@@ -1,0 +1,22 @@
+//To use this function define a macro called SIZE
+//Pass the adjacency matrix, visited array, source, a source, parent(initially -1) and number of vertices as parameters
+//Function call example:-
+//for(int i=0; i<n; i++)
+//isCyclic(adj, vis, i, -1, n); 
+
+bool isCyclic(int adj[][SIZE], int *vis, int u, int p, int n){
+	vis[u]=1;
+	
+	for(int i=0; i<n; i++){
+		if(adj[u][i] && !vis[i]){
+			if(isCyclic(adj, vis, i, u, n))
+				return true;
+		}
+		else if(i!=p)
+			return true;
+	}
+	return true;
+}
+
+
+

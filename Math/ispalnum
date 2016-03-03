@@ -1,0 +1,14 @@
+/*To use this function typedef long long as ll
+This function can be used just to reverse the number
+This function won't work if the number contains leading zeros :xd*/
+ll ispalnum(ll n){
+	ll r, m, rev=0;
+	m=n;
+	while(m!=0){
+		r=m%10;
+		m/=10;
+		rev=rev*10+r;	
+	}
+	//return rev
+	return (rev==n);
+}

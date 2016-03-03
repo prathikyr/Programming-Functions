@@ -1,0 +1,13 @@
+ll phi(ll n){   
+    ll p, r=n;
+	for(p=2; p*p<=n; ++p){
+        if(n%p==0){
+            while(n%p==0)
+                n/=p;
+            r-=r/p;
+        }
+    }
+    if(n>1)
+        r-=r/n;
+    return r;
+}

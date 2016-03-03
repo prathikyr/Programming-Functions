@@ -1,0 +1,20 @@
+/*To use this function typedef long long as ll
+ll sieve(bool *arr, ll n){
+    ll i, j, num, k=0;
+    //ll primes[100000];
+    if(n>=2){
+        for(i=2; i<n; ++i){
+            if(arr[i]==0){
+                //printf("%d ", i);
+                //primes[k++]=i;
+                j=2;
+                while((num=j*i)<=n){
+        			arr[num]=1;
+        			++j;
+    			}
+            }
+        }
+    }
+    return 0;
+    //return primes;
+}
